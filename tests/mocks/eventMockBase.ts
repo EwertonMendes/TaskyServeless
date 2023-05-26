@@ -1,0 +1,57 @@
+import { APIGatewayProxyEvent } from 'aws-lambda';
+
+const event: Omit<APIGatewayProxyEvent, 'body'> & { body: any; rawBody: string; } = {
+    headers: {},
+    multiValueHeaders: {},
+    httpMethod: 'GET',
+    isBase64Encoded: false,
+    path: '/',
+    pathParameters: null,
+    queryStringParameters: null,
+    multiValueQueryStringParameters: null,
+    stageVariables: null,
+    requestContext: {
+      accountId: '',
+      apiId: '',
+      authorizer: {},
+      protocol: '',
+      httpMethod: '',
+      identity: {
+        accessKey: null,
+        accountId: null,
+        apiKey: null,
+        apiKeyId: null,
+        caller: null,
+        cognitoAuthenticationProvider: null,
+        cognitoAuthenticationType: null,
+        cognitoIdentityId: null,
+        cognitoIdentityPoolId: null,
+        principalOrgId: null,
+        sourceIp: '',
+        user: null,
+        userAgent: null,
+        userArn: null,
+        clientCert: null
+      },
+      resourcePath: '',
+      requestId: '',
+      requestTimeEpoch: 0,
+      resourceId: '',
+      stage: '',
+      path: '',
+      connectedAt: 0,
+      connectionId: '',
+      domainName: '',
+      domainPrefix: '',
+      extendedRequestId: '',
+      messageDirection: '',
+      requestTime: '',
+      routeKey: '',
+      eventType: ''
+    },
+    resource: '',
+    body: {},
+    rawBody: '',
+};
+
+export default event;
