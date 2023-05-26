@@ -3,34 +3,30 @@ import createMockContext from "aws-lambda-test-utils";
 import eventMockBase from "../../mocks/eventMockBase";
 
 describe("Given hello lambda function is called", () => {
+  const context = createMockContext.mockContextCreator({}, () => {});
+
   describe("And body is provided correctly", () => {
-    it("Then return response with a greeting message", async () => {
-      const event = {
-        ...eventMockBase,
-        body: { name: "John" },
-      };
+    const event = {
+      ...eventMockBase,
+      body: { name: "Joe" },
+    };
+    
 
-      const context = createMockContext.mockContextCreator({}, () => {});
+    let response: any = null;
 
-      const response = await main(event, context);
-      
+    beforeEach(async () => {
+      response = await main(event, context);
+    });
+
+    it("Then return response with a greeting message", () => {
       expect(response.body).toEqual(
         JSON.stringify({
-          message: "Hello John, welcome to the exciting Serverless world!",
+          message: `Hello ${event.body.name}, welcome to the exciting Serverless world!`,
         })
       );
     });
 
-    it("Then return response with a greeting message", async () => {
-      const event = {
-        ...eventMockBase,
-        body: { name: "John" },
-      };
-
-      const context = createMockContext.mockContextCreator({}, () => {});
-
-      const response = await main(event, context);
-
+    it("Then return response with OK status", () => {
       expect(response.statusCode).toEqual(200);
     });
   });
