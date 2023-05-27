@@ -3,7 +3,7 @@ import { APIGatewayProxyEvent } from 'aws-lambda';
 const event: Omit<APIGatewayProxyEvent, 'body'> & { body: any; rawBody: string; } = {
     headers: {},
     multiValueHeaders: {},
-    httpMethod: 'GET',
+    httpMethod: 'POST',
     isBase64Encoded: false,
     path: '/',
     pathParameters: null,

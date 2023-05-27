@@ -30,4 +30,29 @@ describe("Given hello lambda function is called", () => {
       expect(response.statusCode).toEqual(200);
     });
   });
+
+  describe("And body is NOT provided correctly", () => {
+    const event = {
+      ...eventMockBase,
+      body: {},
+    };
+
+    let response: any = null;
+
+    beforeEach(async () => {
+      response = await main(event, context);
+    });
+
+    it("Then return response with an error", () => {
+      expect(response.body).toEqual(
+        JSON.stringify({
+          error: "Invalid request",
+        })
+      );
+    });
+
+    it("Then return response with Bad Request status", () => {
+      expect(response.statusCode).toEqual(400);
+    });
+  });
 });
